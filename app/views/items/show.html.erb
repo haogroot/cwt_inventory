@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<tr>
+  <%= "Name: " + @item.Name %> </tr>
+  <tr>
+  <%= "Chinese Name: " + @item.Name_Chinese %></tr>
+
+  <tr><%= "Location: " %> <%= @item.locations %></tr>
+ 
+  
+
+
+
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
