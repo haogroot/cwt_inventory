@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   resources :items
   resources :user_infos
   # The priority is based upon order of creation: first created -> highest priority.
