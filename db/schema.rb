@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810183419) do
+ActiveRecord::Schema.define(version: 20150810184539) do
 
   create_table "assigned_projects", id: false, force: :cascade do |t|
     t.integer "UserID",     limit: 4, null: false
@@ -134,8 +134,10 @@ ActiveRecord::Schema.define(version: 20150810183419) do
     t.boolean  "Is_Deleted",    limit: 1,   default: false, null: false
     t.string   "Name",          limit: 255,                 null: false
     t.string   "Pwd",           limit: 255,                 null: false
+    t.integer  "role_id",       limit: 4
   end
 
+  add_index "user_infos", ["role_id"], name: "index_user_infos_on_role_id", using: :btree
   add_index "user_infos", ["rolesID"], name: "User_2_FKIndex1", using: :btree
 
   add_foreign_key "assigned_projects", "projects", column: "projectsID", primary_key: "ID", name: "assigned_projects_ibfk_2", on_update: :cascade, on_delete: :cascade
