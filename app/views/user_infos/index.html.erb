@@ -13,7 +13,7 @@
     <% @user_infos.each do |user_info| %>
       
       <tr>
-        <td><%= link_to user_info.StudentID + " " + user_info.Name %></td>
+        <td><%= link_to  user_info.Name %></td>
         <td><%= link_to 'Show', user_info %></td>    
         <td><%= link_to 'Edit', edit_user_info_path(user_info) %></td>
         <td><%= link_to 'Destroy', user_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
