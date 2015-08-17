@@ -1,7 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <% provide(:title, @user_info.Name) %>
-<h1> <%= gravatar_for @user_info %>
+
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+
+      <h1> <%= gravatar_for @user_info %>
 <%= @user_info.Name %></h1>
 
 <%= "StudentID: " + @user_info.StudentID %><br>
@@ -13,3 +19,7 @@
 <%= link_to 'Edit', edit_user_info_path(@user_info) %> 
 <%= link_to "Delete", @user_info, method: :delete %>
 <%= link_to 'Back', user_infos_path %>
+
+    </section>
+  </aside>
+</div>

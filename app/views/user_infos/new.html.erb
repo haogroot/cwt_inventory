@@ -1,7 +1,43 @@
-<h1>New User Info</h1>
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
 
 
+<%= form_for(@user_info) do |f| %>
+  <% if @user_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_info.errors.count, "error") %> prohibited this user_info from being saved:</h2>
 
-<%= render 'form' %>
+      <ul>
+      <% @user_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', user_infos_path %>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    
+
+    <%= f.label "Student ID：" %>
+    <%= f.text_field :StudentID %>
+    <%= f.label "Your Name："%>
+    <%= f.text_field :Name %>
+    <%= f.label "Your Email:" %>
+    <%= f.email_field :Email %>
+    <%= f.label "Roles ID：" %>
+    <%= f.text_field :rolesID %>
+
+    
+    <%= f.label "Password："%>
+    <%= f.password_field :Pwd %>
+    <%= f.label :Pwd_confirmation %>
+    <%= f.password_field :Pwd_confirmation %>
+    <%= f.submit "Create my account", class: "btn btn-primary" %>
+
+
+  <% end %>
+  <%= link_to 'Back', user_infos_path  %>
+  </div>
+</div>
