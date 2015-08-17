@@ -1,12 +1,10 @@
 module UserInfosHelper
 
-  # Returns the full title on a per-page basis.
-  def full_title(page_title = '')
-    base_title = "NCTU CWT Lab Inventory website"
-    if page_title.empty?
-      base_title
-    else
-      page_title + " | " + base_title
-    end
+  
+
+  def gravatar_for(user_info)
+    gravatar_id = Digest::MD5::hexdigest(user_info.Email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
+    image_tag(gravatar_url, alt: user_info.Name, class: "gravatar")
   end
 end

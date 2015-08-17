@@ -1,10 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <% provide(:title, @user_info.Name) %>
+<h1> <%= gravatar_for @user_info %>
+<%= @user_info.Name %></h1>
 
-<%= @user_info.StudentID %>
-<%= @user_info.rolesID %>
-<%= @user_info.Name %>
+<%= "StudentID: " + @user_info.StudentID %><br>
+<%= "Email: " + @user_info.Email %><br>
+
+
 
 
 <%= link_to 'Edit', edit_user_info_path(@user_info) %> 
