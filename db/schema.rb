@@ -85,10 +85,12 @@ ActiveRecord::Schema.define(version: 20150810184539) do
   end
 
   create_table "items_types", primary_key: "ID", force: :cascade do |t|
-    t.string   "Type_Name",     limit: 255,                 null: false
-    t.datetime "Creation_Time",                             null: false
-    t.boolean  "Is_Deleted",    limit: 1,   default: false, null: false
+    t.string   "Type_Name",     limit: 50,                 null: false
+    t.datetime "Creation_Time",                            null: false
+    t.boolean  "Is_Deleted",    limit: 1,  default: false, null: false
   end
+
+  add_index "items_types", ["Type_Name"], name: "Type_Name", unique: true, using: :btree
 
   create_table "locations", primary_key: "ID", force: :cascade do |t|
     t.string   "locations_Name", limit: 255,                 null: false
@@ -134,10 +136,8 @@ ActiveRecord::Schema.define(version: 20150810184539) do
     t.boolean  "Is_Deleted",    limit: 1,   default: false, null: false
     t.string   "Name",          limit: 255,                 null: false
     t.string   "Pwd",           limit: 255,                 null: false
-    t.integer  "role_id",       limit: 4
   end
 
-  add_index "user_infos", ["role_id"], name: "index_user_infos_on_role_id", using: :btree
   add_index "user_infos", ["rolesID"], name: "User_2_FKIndex1", using: :btree
 
   add_foreign_key "assigned_projects", "projects", column: "projectsID", primary_key: "ID", name: "assigned_projects_ibfk_2", on_update: :cascade, on_delete: :cascade
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20150810184539) do
   add_foreign_key "borrow_return_logs", "items", column: "ItemID", primary_key: "ID", name: "borrow_return_logs_ibfk_2", on_update: :cascade
   add_foreign_key "borrow_return_logs", "items_borrow_status", column: "StatusID", primary_key: "ID", name: "borrow_return_logs_ibfk_3", on_update: :cascade
   add_foreign_key "borrow_return_logs", "user_infos", column: "UserID", primary_key: "ID", name: "borrow_return_logs_ibfk_1", on_update: :cascade
-  add_foreign_key "item_contents", "items", column: "Item_ID", primary_key: "ID", name: "item_contents_ibfk_1", on_update: :cascade
+  add_foreign_key "item_contents", "items", column: "Item_ID", primary_key: "ID", name: "item_contents_ibfk_1"
   add_foreign_key "items", "items_borrow_status", column: "_Status", primary_key: "ID", name: "items_ibfk_5", on_update: :cascade
   add_foreign_key "items", "items_types", column: "_Type", primary_key: "ID", name: "items_ibfk_7", on_update: :cascade
   add_foreign_key "items", "locations", column: "locations", primary_key: "ID", name: "items_ibfk_6", on_update: :cascade
