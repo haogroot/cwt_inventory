@@ -1,32 +1,30 @@
 <%= form_for(@user_info) do |f| %>
-  <% if @user_info.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user_info.errors.count, "error") %> prohibited this user_info from being saved:</h2>
+  
 
-      <ul>
-      <% @user_info.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="actions">
-    
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <%= render 'shared/error_messages' %>
 
     <%= f.label "Student ID：" %>
-    <%= f.text_field :StudentID %><br>
+    <%= f.text_field :StudentID, class: 'form-control' %>
     <%= f.label "Your Name："%>
-    <%= f.text_field :Name %><br>
+    <%= f.text_field :Name, class: 'form-control' %>
     <%= f.label "Your Email:" %>
-    <%= f.text_field :Email %><br>
+    <%= f.email_field :email, class: 'form-control' %>
     <%= f.label "Roles ID：" %>
-    <%= f.text_field :rolesID %><br>
+    <%= f.text_field :rolesID, class: 'form-control' %>
 
     
     <%= f.label "Password："%>
-    <%= f.text_field :Pwd %>
-    <%= f.submit %>
+    <%= f.password_field :password, class: 'form-control' %>
+    <%= f.label :Pwd_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+    <%= f.submit "Update my account", class: "btn btn-primary" %>
 
+
+  <% end %>
+  <!--<%= link_to 'Back', user_infos_path  %> -->
   </div>
-<% end %>
+</div>
+
