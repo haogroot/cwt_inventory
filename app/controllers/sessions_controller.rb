@@ -3,14 +3,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = Userinfo.find_by(studentID: params[:session][:studentID])
+    user = UserInfo.find_by(studentID: params[:session][:studentID])
     if user && user.authenticate(params[:session][:password])
       # Log the user in 
+      log_in user
+      redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
+    end
   end
 
   def destroy
+    log_out
+    redirect_to login_path
   end
 end
