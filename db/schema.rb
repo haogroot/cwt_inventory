@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818061536) do
+ActiveRecord::Schema.define(version: 20150818124350) do
 
   create_table "assigned_projects", id: false, force: :cascade do |t|
     t.integer "UserID",     limit: 4, null: false
@@ -130,15 +130,14 @@ ActiveRecord::Schema.define(version: 20150818061536) do
   end
 
   create_table "user_infos", primary_key: "ID", force: :cascade do |t|
-    t.string   "StudentID",        limit: 20
-    t.string   "email",            limit: 50,                  null: false
-    t.integer  "rolesID",          limit: 4,                   null: false
-    t.datetime "Creation_Time",                                null: false
-    t.boolean  "Is_Deleted",       limit: 1,   default: false, null: false
-    t.string   "Name",             limit: 255,                 null: false
-    t.string   "Pwd",              limit: 255,                 null: false
-    t.string   "Pwd_confirmation", limit: 255,                 null: false
-    t.string   "password_digest",  limit: 255
+    t.string   "StudentID",       limit: 20
+    t.string   "email",           limit: 50,                  null: false
+    t.integer  "rolesID",         limit: 4,                   null: false
+    t.datetime "Creation_Time",                               null: false
+    t.boolean  "Is_Deleted",      limit: 1,   default: false, null: false
+    t.string   "Name",            limit: 255,                 null: false
+    t.string   "password_digest", limit: 255
+    t.string   "remember_digest", limit: 255
   end
 
   add_index "user_infos", ["rolesID"], name: "User_2_FKIndex1", using: :btree
