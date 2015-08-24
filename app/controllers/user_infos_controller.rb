@@ -46,7 +46,7 @@ class UserInfosController < ApplicationController
     
     respond_to do |format|
       if @user_info.update(user_info_params)
-        format.html { redirect_to @user_info, notice: 'User info was successfully updated.' }
+        format.html { redirect_to @user_info, notice: 'User profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_info }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class UserInfosController < ApplicationController
   def destroy
     @user_info.destroy
     respond_to do |format|
-      format.html { redirect_to user_infos_url, notice: 'User info was successfully destroyed.' }
+      format.html { redirect_to user_infos_url, notice: 'User profile was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
