@@ -1,6 +1,7 @@
 class UserInfosController < ApplicationController
   before_action :set_user_info, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /user_infos
   # GET /user_infos.json
@@ -80,9 +81,17 @@ class UserInfosController < ApplicationController
     # confirm user log in?
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "Sorry, You have to log in!"
         redirect_to login_url
         
       end
     end
+
+    # confirm current user
+    def correct_user
+      @user_info = UserInfo.find(params[:id])
+      redirect_to user_info_path unless @user_info = current_user
+        
+      end
 end
