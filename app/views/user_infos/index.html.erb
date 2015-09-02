@@ -1,27 +1,17 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing User Infos</h1>
+<% provide(:title, 'All users') %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h1>Listing Users</h1>
 
-  <tbody>
-    <% @user_infos.each do |user_info| %>
-      
-      <tr>
-        <td><%= link_to  user_info.Name %></td>
-        <td><%= link_to 'Show', user_info %></td>    
-        <td><%= link_to 'Edit', edit_user_info_path(user_info) %></td>
-        <td><%= link_to 'Destroy', user_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<ul class="users">
+  <% @user_infos.each do |user| %>
+    <li>
+      <%= gravatar_for user %>
+      <%= link_to user.Name, user %>
+    </li>
+  <% end %>
+</ul>
 
 <br>
-
 <%= link_to 'New User info', new_user_info_path %>
