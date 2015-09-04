@@ -7,6 +7,10 @@ gem 'rails', '4.2.1'
 gem 'bcrypt', '3.1.7'
 # Use bootstrap https://rubygems.org/gems/bootstrap-sass/versions/3.3.0.0
 gem 'bootstrap-sass', '3.3.0.0'
+# Use paginate 
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets

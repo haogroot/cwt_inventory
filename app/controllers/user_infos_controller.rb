@@ -6,7 +6,7 @@ class UserInfosController < ApplicationController
   # GET /user_infos
   # GET /user_infos.json
   def index
-    @user_infos = UserInfo.all
+    @user_infos = UserInfo.paginate(page: params[:page], :per_page=>10)
   end
 
   # GET /user_infos/1
