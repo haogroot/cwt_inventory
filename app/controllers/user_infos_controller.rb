@@ -1,8 +1,8 @@
 class UserInfosController < ApplicationController
   before_action :set_user_info, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-
+  before_action :admin_user, only: [:destroy]
   # GET /user_infos
   # GET /user_infos.json
   def index
@@ -62,7 +62,7 @@ class UserInfosController < ApplicationController
   def destroy
     @user_info.destroy
     respond_to do |format|
-      format.html { redirect_to user_infos_url, notice: 'User profile was successfully destroyed.' }
+      format.html { redirect_to user_infos_url, notice: 'User was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -91,7 +91,12 @@ class UserInfosController < ApplicationController
     # confirm current user
     def correct_user
       @user_info = UserInfo.find(params[:id])
-      redirect_to user_info_path unless @user_info = current_user
-        
-      end
+      redirect_to user_info_path unless @user_info = current_user    
+    end
+
+    # confirm admin user
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
 end

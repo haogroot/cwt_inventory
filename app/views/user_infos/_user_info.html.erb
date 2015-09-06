@@ -1,5 +1,9 @@
 <li>
   <%= gravatar_for user_info %>
   <%= link_to user_info.Name, user_info %>
-
+  <!-- admin can delete the other user include admin, but cann't delete himself/herself -->
+  <% if current_user.admin? && !current_user?(user_info) %>
+    | <%= link_to "delete", user_info, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
 </li>
