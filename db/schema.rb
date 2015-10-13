@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011054514) do
+ActiveRecord::Schema.define(version: 20151011052825) do
 
   create_table "assigned_projects", id: false, force: :cascade do |t|
     t.integer "UserID",     limit: 4, null: false
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 20151011054514) do
 
   add_index "assigned_projects", ["UserID"], name: "Assigned_Project_FKIndex1", using: :btree
   add_index "assigned_projects", ["projectsID"], name: "Assigned_Project_FKIndex2", using: :btree
+
+  create_table "borrow_logs", force: :cascade do |t|
+    t.text     "log",          limit: 65535
+    t.integer  "user_info_id", limit: 4
+    t.integer  "item_id",      limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "borrow_logs", ["item_id"], name: "index_borrow_logs_on_item_id", using: :btree
+  add_index "borrow_logs", ["user_info_id"], name: "index_borrow_logs_on_user_info_id", using: :btree
 
   create_table "borrow_return_logs", primary_key: "ID", force: :cascade do |t|
     t.integer  "UserID",        limit: 4,   null: false
@@ -72,7 +83,6 @@ ActiveRecord::Schema.define(version: 20151011054514) do
     t.integer  "Quantity",          limit: 4,     default: 1
     t.text     "Description",       limit: 65535
     t.integer  "ReceiptID",         limit: 4
-    t.integer  "item_situation_id", limit: 4
   end
 
   add_index "items", ["Assigned_To"], name: "Items_FKIndex1", using: :btree
@@ -83,7 +93,6 @@ ActiveRecord::Schema.define(version: 20151011054514) do
   add_index "items", ["Source_project"], name: "Items_FKIndex7", using: :btree
   add_index "items", ["_Status"], name: "Items_FKIndex4", using: :btree
   add_index "items", ["_Type"], name: "Items_FKIndex6", using: :btree
-  add_index "items", ["item_situation_id"], name: "index_items_on_item_situation_id", using: :btree
   add_index "items", ["locations"], name: "Items_FKIndex5", using: :btree
 
   create_table "items_borrow_status", primary_key: "ID", force: :cascade do |t|
@@ -160,7 +169,6 @@ ActiveRecord::Schema.define(version: 20151011054514) do
   add_foreign_key "borrow_return_logs", "items_borrow_status", column: "StatusID", primary_key: "ID", name: "borrow_return_logs_ibfk_3", on_update: :cascade
   add_foreign_key "borrow_return_logs", "user_infos", column: "UserID", primary_key: "ID", name: "borrow_return_logs_ibfk_1", on_update: :cascade
   add_foreign_key "item_contents", "items", column: "Item_ID", primary_key: "ID", name: "item_contents_ibfk_1"
-  add_foreign_key "items", "item_situations"
   add_foreign_key "items", "items_borrow_status", column: "_Status", primary_key: "ID", name: "items_ibfk_5", on_update: :cascade
   add_foreign_key "items", "items_types", column: "_Type", primary_key: "ID", name: "items_ibfk_7", on_update: :cascade
   add_foreign_key "items", "locations", column: "locations", primary_key: "ID", name: "items_ibfk_6", on_update: :cascade
